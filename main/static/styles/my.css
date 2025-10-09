@@ -1,0 +1,52 @@
+.container{
+ display: flex;
+ justify-content: space-between;
+ width: 100%
+ gap: 10px;
+
+}
+
+.item{
+ flex: 1;
+ min-width: 0;
+ border: 1px solid #ccc
+ padding: 20px;
+ text-align: center;
+}
+
+li{
+ list-style-type: none;
+}
+
+.navbar{
+ display: flex;
+ justify-content: center;
+ align-item:center;
+ height: 100vh;
+ gap: 30px;
+}
+
+.navbar a{
+ padding: 10px 20px;
+ text-decoration: none;
+ color: #333
+ border-right: 1px solid #ccc
+}
+
+.navbar a:last-child{
+ border-right: none;
+}
+
+body{
+ background: #000;
+ margin: 0;
+ padding: 0;
+ height: 100%;
+}
+
+html{
+ margin: 0;
+ padding: 0;
+ height: 100%;
+}
+

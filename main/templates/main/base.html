@@ -1,0 +1,42 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>ШаурмичнаяМОЯ</title>
+    <link rel="shortcut icon"  href="{% static 'images/img.png' %}" type="image/x-icon">
+<!--    <link rel="stylesheet" href="{% static 'styles/my.css' %}">-->
+
+    <link rel="stylesheet" href="{% static 'styles/bootstrap.css' %}">
+    <link rel="stylesheet" href="{% static 'styles/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'styles/bootstrap.rtl.css' %}">
+    <link rel="stylesheet" href="{% static 'styles/bootstrap.rtl.min.css' %}">
+</head>
+
+<style>
+        body {
+            background-color: black;
+            color: white;
+        }
+    </style>
+
+<body>
+
+<div style="text-align: right; margin-right: 30px; margin-top: 20px;">
+<!--    <form action="{% url 'logoutuser' %}" method="post">-->
+<!--        {% csrf_token %}-->
+<!--        <button style="border-radius: 20%; width: 60px; height: 30px;">Выход </button>-->
+<!--    </form>-->
+
+    <li><a href="{% url 'logoutuser' %}">LOGOUT</a></li>
+</div>
+
+{% block content %}
+
+
+{% endblock %}
+
+<script src="{% static 'js/bootstrap.bundle.js' %}"></script>
+<script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
+</body>
+</html>

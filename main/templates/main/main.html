@@ -1,0 +1,163 @@
+{% extends 'main/base.html' %}
+
+{% block content %}
+{% include 'main/navbar.html' %}
+
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    margin: 20px;
+    background-color: #000000;
+    color: #ffffff;
+  }
+
+ .clas{
+            background-color: grey;
+        }
+
+
+  h1.container {
+    text-align: center;
+    color: #ffffff;
+    margin-top: 30px;
+    margin-bottom: 40px;
+  }
+
+  .container {
+    text-align: center;
+  }
+
+  .btn3, .btn4 {
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 5px;
+    margin: 0 10px 30px 10px;
+    transition: background-color 0.3s ease;
+  }
+
+  .btn3 {
+    background-color: #4CAF50;
+  }
+
+  .btn3:hover {
+    background-color: #45a049;
+  }
+
+  .btn4 {
+    background-color: #008CBA;
+  }
+
+  .btn4:hover {
+    background-color: #007bb5;
+  }
+
+  h2, h3 {
+    max-width: 900px;
+    margin: 20px auto;
+    line-height: 1.5;
+    color: #ffffff;
+  }
+
+  h2 {
+    color: #ffcc00; /* яркий цвет для заголовков */
+  }
+
+  .image-large {
+    display: block;
+    margin: 30px auto;
+    width: 100%;
+    max-width: 1560px;
+    height: 600px;
+    object-fit: cover;
+    border-radius: 15px;
+    filter: brightness(0.75); /* затемнение изображения */
+  }
+
+  .flex-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    max-width: 1300px;
+    margin: 40px auto;
+    gap: 20px;
+  }
+
+  .flex-container img {
+    border-radius: 50px;
+    width: 630px;
+    height: 550px;
+    object-fit: cover;
+    box-shadow: 0 4px 10px rgba(255, 255, 255, 0.15);
+    filter: brightness(0.85);
+  }
+
+  .flex-text {
+    max-width: 600px;
+    text-align: left;
+  }
+    .clas{
+            background-color: grey;
+</style>
+
+<div>
+  <img src="static/images/images_cms-image-000112978.jpg" alt="Описание изображения" class="image-large">
+</div>
+
+<h1 class="container">ШаурмичнаяМОЯ</h1>
+
+<div class="container">
+  <button class="btn3" onclick="window.location.href='/signupuser'">Регистрация</button>
+  <button class="btn4" onclick="window.location.href='/loginuser'">Вход</button>
+</div>
+
+<h2>Что такое шаверма?</h2>
+<h3>
+  Шаверма (также известна как шаурма, донер кебаб, гирос, в зависимости от региона и способа приготовления) — это популярное блюдо ближневосточной кухни, состоящее из тонко нарезанного мяса, обжаренного на вертикальном вертеле, затем завёрнутого в лаваш или питу с соусами, овощами и специями.
+</h3>
+
+<div class="flex-container">
+  <img src="static/images/img_1.png" alt="Описание изображения">
+  <div class="flex-text">
+    <h2>Основные компоненты шавермы</h2>
+    <h3>Мясо, лаваш или пита, соус, овощи, специи.</h3>
+  </div>
+</div>
+
+<h2>
+  Шаверма имеет интересную историю. Ее корни в Ближнем Востоке, возникла в Османской империи. Мясо готовили на вертикальном вертеле и нарезали тонкими слоями, похожими на греческий гирос и турецкий донер-кебаб.
+</h2>
+
+<div class="flex-container">
+  <div class="flex-text">
+    <h2>Историческое развитие шавермы</h2>
+    <h2>
+      Мясо обычно подавали с лепешками и соусами, что дало начало современноу варианту шавермы.
+      В 20 веке, особенно в 1960-х, блюдо стало популярным за пределами Ближнего Востока.
+      Через Ливан и Сирию шаверма распространилась по России и Европе.
+    </h2>
+  </div>
+  <img src="static/images/lhgqmwpg277sbin8wcmeq4jqp4ir0ewo.jpg" alt="Описание изображения" style="border-radius: 50%;">
+</div>
+
+<h2>
+  Мясо подавали с лепешками и соусами, что дало начало современному варианту шавермы. В 20 веке шаверма приобрела мировую популярность.
+</h2>
+
+<center>
+<div class="clas">
+
+ <h3>  Волгоградская область, город Шаховская, въезд Гагарина, 41 </h3>
+
+ <h3> 2024 Мой сайт. Все права защищены. </h3>
+
+</div>
+</center>
+
+
+{% endblock %}

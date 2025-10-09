@@ -1,0 +1,64 @@
+{% extends 'main/base.html' %}
+
+{% block content %}
+<h1>Меню</h1>
+{% include 'main/navbar.html' %}
+
+<div class="container">
+  {% for dish in menu %}
+    <div class="item">
+      <ul>
+        <li>Название: {{ dish.name }}</li>
+        <li><img src="{{ dish.photo.url }}" style="width: 350px; height: 250px;" alt="изображение"></li>
+        <li>Описание: {{ dish.description }}</li>
+        <li>Состав: {{ dish.сomposition }}</li>
+        <li>Вес: {{ dish.weight }} грамм</li>
+        <li>Цена: {{ dish.price }} руб</li>
+        <li>Рейтинг: {{ dish.rating }} / 5</li>
+      </ul>
+      <!-- Кнопка для добавления в корзину -->
+      <form method="post" action="{% url 'add_to_cart' dish.id %}">
+        {% csrf_token %}
+        <button type="submit" style="background-color: #4CAF50; color: white; padding: 10px 20px; border: none; border-radius: 4px; cursor: pointer;">Добавить в корзину</button>
+      </form>
+    </div>
+  {% endfor %}
+</div>
+
+<div style="background-color: grey ; margin-top: 60px; ">
+
+<!-- Отображение корзины -->
+<h2>Корзина</h2>
+{% if cart_items %}
+  <div class="cart">
+    <ul>
+      {% for item in cart_items %}
+        <li>
+          {{ item.dish.name }} (x{{ item.quantity }}) - {{ item.item_total }} руб
+        </li>
+      {% endfor %}
+    </ul>
+    <p>Общее количество: {{ total_quantity }}</p>
+    <p>Общая сумма: {{ total_price }} руб</p>
+    <form method="post" action="{% url 'clear_cart' %}">
+      {% csrf_token %}
+      <button type="submit" style="background-color: #f44336; color: white; padding: 10px 20px; border: none; border-radius: 4px; cursor: pointer;">Очистить корзину</button>
+    </form>
+  </div>
+{% else %}
+
+
+  <p>Корзина пуста.</p>
+{% endif %}
+
+<!-- Сообщения (например, "Блюдо добавлено в корзину") -->
+{% if messages %}
+  <ul class="messages">
+    {% for message in messages %}
+      <li>{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+    {% endfor %}
+  </ul>
+{% endif %}
+{% endblock %}
+
+</div>

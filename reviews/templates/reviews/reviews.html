@@ -1,0 +1,203 @@
+{% extends 'main/base.html' %}
+
+{% block content %}
+<h1> Отзывы </h1>
+{% include 'main/navbar.html' %}
+
+<style>
+body {
+    font-family: Arial, sans-serif;
+    background-color: Black;
+    color: white;
+    line-height: 1.6;
+}
+
+.simple-reviews-block {
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    background-color: #fefefe;
+    max-width: 800px;
+    margin: 20px auto;
+}
+
+.simple-reviews-block h2 {
+    text-align: center;
+    color: #333;
+    font-size: 1.5em;
+    margin-bottom: 20px;
+}
+
+.review-card {
+    background-color: #fff;
+    padding: 15px;
+    margin-bottom: 25px;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.review-card p {
+    margin: 0 0 10px 0;
+    color: #444;
+    font-size: 1em;
+}
+
+.review-card small {
+    color: #777;
+    font-size: 0.9em;
+    display: block;
+    text-align: right;
+}
+
+.response-card {
+    background-color: #f9f9f9;
+    padding: 10px;
+    margin-top: 10px;
+    margin-left: 20px;
+    border-left: 3px solid #007bff;
+    font-size: 0.95em;
+    color: #555;
+}
+
+.response-card small {
+    text-align: right;
+    display: block;
+    margin-top: 5px;
+    color: #888;
+}
+
+/* Форма */
+.form {
+    max-width: 800px;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: #fefefe;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.form label {
+    display: block;
+    margin-bottom: 5px;
+    color: #555;
+}
+
+.form input[type="text"],
+.form textarea {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    box-sizing: border-box;
+    font-size: 1em;
+}
+
+.form textarea {
+    resize: vertical;
+    height: 150px;
+}
+
+.form input[type="submit"] {
+    background-color: #5cb85c;
+    color: white;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 1.1em;
+    transition: background-color 0.3s;
+}
+
+.clas {
+    background-color: grey;
+    padding: 15px;
+}
+.response-form {
+    margin-top: 10px;
+    padding: 10px;
+    background-color: #f0f8ff;
+    border-radius: 5px;
+    display: none;
+}
+
+.response-form.visible {
+    display: block;
+}
+</style>
+
+<div class="simple-reviews-block">
+  <h2>Отзывы </h2>
+  {% for review in rev %}
+  <div class="review-card">
+    <p>{{ review.review }}</p>
+    <small>- {{ review.reviewer }}</small>
+    <p><strong>Оценка:</strong> {{ review.get_rating_display }}</p>
+
+    <!-- Ответы -->
+    {% for response in review.responses.all %}
+      {% if response.is_published %}
+        <div class="response-card">
+          <p>{{ response.response_text }}</p>
+          <small>— {{ response.author }}</small>
+        </div>
+      {% endif %}
+    {% endfor %}
+
+    <button type="button" onclick="toggleResponseForm({{ review.id }})">
+      Ответить
+    </button>
+
+    <form class="response-form" id="response-form-{{ review.id }}" method="POST">
+      {% csrf_token %}
+      <input type="hidden" name="review_id" value="{{ review.id }}">
+      <input type="hidden" name="response_submit" value="1">
+
+      <div>
+        <label>Ваше имя:</label>
+        {{ response_form.author }}
+      </div>
+      <div>
+        <label>Ваш ответ:</label>
+        {{ response_form.response_text }}
+      </div>
+      <button type="submit">Отправить ответ</button>
+      <button type="button" onclick="toggleResponseForm({{ review.id }})">Отмена</button>
+    </form>
+  </div>
+  {% empty %}
+  <p>Пока нет отзывов.</p>
+  {% endfor %}
+</div>
+
+<form class="form" method="POST">
+  {% csrf_token %}
+  <input type="hidden" name="review_submit" value="1">
+  {% for field in review_form %}
+  <div>
+    <label>{{ field.label }}:</label>
+    {{ field }}
+    {% if field.errors %}
+      <small style="color: red;">{{ field.errors }}</small>
+    {% endif %}
+  </div>
+  {% endfor %}
+  <input type="submit" value="Отправить отзыв"/>
+</form>
+
+<center>
+<div class="clas">
+  <h3>Волгоградская область, город Шаховская, въезд Гагарина, 41</h3>
+  <h3>2024 Мой сайт. Все права защищены.</h3>
+</div>
+</center>
+
+<script>
+function toggleResponseForm(reviewId) {
+  const form = document.getElementById('response-form-' + reviewId);
+  form.classList.toggle('visible');
+}
+</script>
+
+{% endblock %}
